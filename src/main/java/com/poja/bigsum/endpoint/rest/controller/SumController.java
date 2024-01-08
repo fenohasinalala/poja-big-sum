@@ -25,9 +25,10 @@ public class SumController {
       new ResponseEntity<>("KO", HttpStatus.INTERNAL_SERVER_ERROR);
 
   @GetMapping("/sum")
-  public String sum(@RequestParam(required = false) String a, @RequestParam(required = false) String b) {
-    nonNullValidation(a,"a");
-    nonNullValidation(b,"b");
+  public String sum(
+      @RequestParam(required = false) String a, @RequestParam(required = false) String b) {
+    nonNullValidation(a, "a");
+    nonNullValidation(b, "b");
     numberValidation(a);
     numberValidation(b);
     BigInteger n1 = new BigInteger(a);
@@ -37,7 +38,7 @@ public class SumController {
 
   public static boolean isValidNumber(String num) {
     // Regular expression for a valid number (integer or decimal)
-    //String regex = "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
+    // String regex = "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
 
     // Regular expression for a valid integer
     String regex = "[-+]?\\d+";
@@ -45,15 +46,15 @@ public class SumController {
     return num.matches(regex);
   }
 
-  public void numberValidation(String num){
-    if (!isValidNumber(num)){
-      throw new BadRequestException(num+" is not a valid number");
+  public void numberValidation(String num) {
+    if (!isValidNumber(num)) {
+      throw new BadRequestException(num + " is not a valid number");
     }
   }
 
-  public void nonNullValidation(String value, String variableName){
-    if (value == null){
-      throw new BadRequestException(variableName+" is mandatory");
+  public void nonNullValidation(String value, String variableName) {
+    if (value == null) {
+      throw new BadRequestException(variableName + " is mandatory");
     }
   }
 }
